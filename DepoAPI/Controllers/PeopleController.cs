@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DepoAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,16 +10,24 @@ namespace DepoAPI.Controllers
 {
     public class PeopleController : ApiController
     {
-        // GET: api/People
-        public IEnumerable<string> Get()
+        List<Person> people = new List<Person>();
+
+        public PeopleController()
         {
-            return new string[] { "value1", "value2" };
+            people.Add(new Person { FirsName = "Tim", LastName = "Corey", Id = 1 });
+            people.Add(new Person { FirsName = "Sue", LastName = "Storm", Id = 2 });
+            people.Add(new Person { FirsName = "Bilbo", LastName = "Baggins", Id = 3 });
+        }
+        // GET: api/People
+        public List<Person> Get()
+        {
+            return people;
         }
 
         // GET: api/People/5
-        public string Get(int id)
+        public Person Get(int id)
         {
-            return "value";
+            return people.Where(x => x.Id == id).FirstOrDefault();
         }
 
         // POST: api/People
