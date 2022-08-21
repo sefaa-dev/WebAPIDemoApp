@@ -18,6 +18,19 @@ namespace DepoAPI.Controllers
             people.Add(new Person { FirsName = "Sue", LastName = "Storm", Id = 2 });
             people.Add(new Person { FirsName = "Bilbo", LastName = "Baggins", Id = 3 });
         }
+        [Route("api/People/GetFirstNames")]
+        [HttpGet]
+        public List<string> GetFirstNames()
+        {
+            List<string> output = new List<string>();
+
+            foreach (var p in people)
+            {
+                output.Add(p.FirsName);
+            }
+            return output;
+        }
+
         // GET: api/People
         public List<Person> Get()
         {
@@ -31,8 +44,9 @@ namespace DepoAPI.Controllers
         }
 
         // POST: api/People
-        public void Post([FromBody]string value)
+        public void Post(Person val)
         {
+            people.Add(val);
         }
 
         // PUT: api/People/5
